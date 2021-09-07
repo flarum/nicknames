@@ -16,9 +16,11 @@ flarum-nicknames:
       title:  => flarum-nicknames.ref.change_nickname
     edit_user:
       nicknames_heading: => flarum-nicknames.ref.change_nickname
-      nicknames_text: Nickname
+      nicknames_text: => flarum-nicknames.ref.nickname
     settings:
       change_nickname_button: => flarum-nicknames.ref.change_nickname
-
+    sign_up:
+      nickname_placeholder: => flarum-nicknames.ref.nickname
   ref:
     change_nickname: Change Nickname
+    nickname: Nickname

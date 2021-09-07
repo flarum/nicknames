@@ -16,7 +16,9 @@ class SaveNicknameToDatabase {
         $attributes = Arr::get($data, 'attributes', []);
 
         if (isset($attributes['nickname'])) {
-            if ($isSelf) {
+            if (!$actor->exists) {
+                // Allow setting nickname on registration
+            } else if ($isSelf) {
                 $actor->assertCan('editOwnNickname', $user);
             } else {
                 $actor->assertCan('edit', $user);
