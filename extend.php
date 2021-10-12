@@ -13,8 +13,10 @@ namespace Flarum\Nicknames;
 
 use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Extend;
+use Flarum\Nicknames\Access\UserPolicy;
 use Flarum\User\Event\Saving;
 use Flarum\User\Search\UserSearcher;
+use Flarum\User\User;
 use Flarum\User\UserValidator;
 
 return [
@@ -45,5 +47,8 @@ return [
         ->configure(AddNicknameValidation::class),
 
     (new Extend\SimpleFlarumSearch(UserSearcher::class))
-        ->setFullTextGambit(NicknameFullTextGambit::class)
+        ->setFullTextGambit(NicknameFullTextGambit::class),
+
+    (new Extend\Policy())
+        ->modelPolicy(User::class, UserPolicy::class),
 ];
