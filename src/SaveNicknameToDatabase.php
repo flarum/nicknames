@@ -2,10 +2,21 @@
 
 namespace Flarum\Nicknames;
 
+use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\Event\Saving;
+use Flarum\User\Exception\PermissionDeniedException;
 use Illuminate\Support\Arr;
 
 class SaveNicknameToDatabase {
+    /**
+     * @var SettingsRepositoryInterface
+     */
+    protected $settings;
+
+    public function __construct(SettingsRepositoryInterface $settings) {
+        $this->settings = $settings;
+    }
+
     public function handle(Saving $event)
     {
         $user = $event->user;
@@ -20,6 +31,8 @@ class SaveNicknameToDatabase {
                 $actor->assertCan('editOwnNickname', $user);
             } elseif ($actor->exists) {
                 $actor->assertCan('edit', $user);
+            } elseif (!$user->exists && !$this->settings->get('flarum-nicknames.set_on_registration')) {
+                throw new PermissionDeniedException();
             }
 
             $nickname = $attributes['nickname'];
