@@ -9,12 +9,22 @@
 
 namespace Flarum\Nicknames\Access;
 
-use Flarum\Group\Group;
+use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\Access\AbstractPolicy;
 use Flarum\User\User;
 
 class UserPolicy extends AbstractPolicy
 {
+    /**
+     * @var SettingsRepositoryInterface
+     */
+    protected $settings;
+
+    public function __construct(SettingsRepositoryInterface $settings)
+    {
+        $this->settings = $settings;
+    }
+    
     /**
      * @param User $actor
      * @param User $user
@@ -22,7 +32,7 @@ class UserPolicy extends AbstractPolicy
      */
     public function editOwnNickname(User $actor, User $user)
     {
-        if ($actor->isGuest() && !$user->exists && Group::find(GROUP::MEMBER_ID)->hasPermission('user.editOwnNickname')) {
+        if ($actor->isGuest() && !$user->exists && $this->settings->get('flarum-nicknames.set_on_registration')) {
             return $this->allow();
         }
     }

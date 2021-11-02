@@ -57,7 +57,8 @@ class RegisterTest extends TestCase
      */
     public function cant_register_with_nickname_if_not_allowed()
     {
-        $this->database()->table('group_permission')->where('permission', 'user.editOwnNickname')->delete();
+        $this->setting('flarum-nicknames.set_on_registration', false);
+
         $response = $this->send(
             $this->request('POST', '/register', [
                 'json' => [

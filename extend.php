@@ -44,8 +44,7 @@ return [
         ->default('flarum-nicknames.set_on_registration', true)
         ->serializeToForum('displayNameDriver', 'display_name_driver', null, 'username')
         ->serializeToForum('setNicknameOnRegistration', 'flarum-nicknames.set_on_registration', 'boolval')
-        ->serializeToForum('randomizeUsernameOnRegistration', 'flarum-nicknames.random_username', 'boolval')
-    ->serializeToForum('randomizeUsernameOnRegistration', 'flarum-nicknames.random_username', 'boolval'),
+        ->serializeToForum('randomizeUsernameOnRegistration', 'flarum-nicknames.random_username', 'boolval'),
 
     (new Extend\Validator(UserValidator::class))
         ->configure(AddNicknameValidation::class),

@@ -23,7 +23,7 @@ class SaveNicknameToDatabase {
         $data = $event->data;
         $actor = $event->actor;
 
-        $isSelf = $actor->id === $user->id;
+        $isSelf = $actor->id == $user->id;
         $attributes = Arr::get($data, 'attributes', []);
 
         if (isset($attributes['nickname'])) {
@@ -31,8 +31,6 @@ class SaveNicknameToDatabase {
                 $actor->assertCan('editOwnNickname', $user);
             } elseif ($actor->exists) {
                 $actor->assertCan('edit', $user);
-            } elseif (!$user->exists && !$this->settings->get('flarum-nicknames.set_on_registration')) {
-                throw new PermissionDeniedException();
             }
 
             $nickname = $attributes['nickname'];

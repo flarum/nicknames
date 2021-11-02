@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "275d8c394b5d41485cbe700cced0e3b7",
+    "content-hash": "577c2195fc293fb5ccc77a19d86bd694",
     "packages": [
         {
             "name": "axy/backtrace",
@@ -1208,16 +1208,16 @@
         },
         {
             "name": "flarum/core",
-            "version": "v1.1.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/flarum/core.git",
-                "reference": "eb3a60338f5390154438cbf5a2d3d3fa855a3349"
+                "reference": "8a69c890e7c3b195494752bb4b4842d9b0269275"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/flarum/core/zipball/eb3a60338f5390154438cbf5a2d3d3fa855a3349",
-                "reference": "eb3a60338f5390154438cbf5a2d3d3fa855a3349",
+                "url": "https://api.github.com/repos/flarum/core/zipball/8a69c890e7c3b195494752bb4b4842d9b0269275",
+                "reference": "8a69c890e7c3b195494752bb4b4842d9b0269275",
                 "shasum": ""
             },
             "require": {
@@ -1273,6 +1273,7 @@
             "require-dev": {
                 "flarum/testing": "1.0@dev"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1325,7 +1326,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-10-22T09:28:37+00:00"
+            "time": "2021-11-01T20:38:21+00:00"
         },
         {
             "name": "franzl/whoops-middleware",
@@ -7640,29 +7641,30 @@
         },
         {
             "name": "flarum/testing",
-            "version": "v0.1.0-beta.16.1",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/flarum/testing.git",
-                "reference": "7c6cc2772bf6aa0af3e93a2d52ea9d4618f044c5"
+                "reference": "83d53382b4e0d4b8d90a978566994274ff2998ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/flarum/testing/zipball/7c6cc2772bf6aa0af3e93a2d52ea9d4618f044c5",
-                "reference": "7c6cc2772bf6aa0af3e93a2d52ea9d4618f044c5",
+                "url": "https://api.github.com/repos/flarum/testing/zipball/83d53382b4e0d4b8d90a978566994274ff2998ed",
+                "reference": "83d53382b4e0d4b8d90a978566994274ff2998ed",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "mockery/mockery": "^1.4",
                 "phpunit/phpunit": "^9.0"
             },
             "require-dev": {
-                "flarum/core": "^0.1.0-beta"
+                "flarum/core": "*@dev"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1.x-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -7681,7 +7683,7 @@
                 "forum"
             ],
             "support": {
-                "source": "https://github.com/flarum/testing/tree/v0.1.0-beta.16.1"
+                "source": "https://github.com/flarum/testing/tree/v1.0.1"
             },
             "funding": [
                 {
@@ -7697,7 +7699,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-03-11T18:07:31+00:00"
+            "time": "2021-06-21T07:32:27+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -9713,7 +9715,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "flarum/testing": 10
+        "flarum/core": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
