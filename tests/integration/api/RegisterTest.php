@@ -31,6 +31,8 @@ class RegisterTest extends TestCase
      */
     public function can_register_with_nickname()
     {
+        $this->setting('flarum-nicknames.set_on_registration', true);
+
         $response = $this->send(
             $this->request('POST', '/register', [
                 'json' => [
