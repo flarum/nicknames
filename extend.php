@@ -42,6 +42,8 @@ return [
 
     (new Extend\Settings())
         ->default('flarum-nicknames.set_on_registration', true)
+        ->default('flarum-nicknames.min', 1)
+        ->default('flarum-nicknames.max', 150)
         ->serializeToForum('displayNameDriver', 'display_name_driver', null, 'username')
         ->serializeToForum('setNicknameOnRegistration', 'flarum-nicknames.set_on_registration', 'boolval')
         ->serializeToForum('randomizeUsernameOnRegistration', 'flarum-nicknames.random_username', 'boolval'),
