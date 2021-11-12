@@ -7,7 +7,7 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Flarum\Nicknames\Tests\integration\forum;
+namespace Flarum\Nicknames\Tests\integration;
 
 use Flarum\Extend;
 use Flarum\Testing\integration\TestCase;

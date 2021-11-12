@@ -24,15 +24,19 @@ class UserPolicy extends AbstractPolicy
     {
         $this->settings = $settings;
     }
-    
+
     /**
      * @param User $actor
      * @param User $user
      * @return bool|null
      */
-    public function editOwnNickname(User $actor, User $user)
+    public function editNickname(User $actor, User $user)
     {
         if ($actor->isGuest() && !$user->exists && $this->settings->get('flarum-nicknames.set_on_registration')) {
+            return $this->allow();
+        } else if ($actor->id === $user->id && $actor->hasPermission('user.editOwnNickname')) {
+            return $this->allow();
+        } else if ($actor->can('edit', $user)) {
             return $this->allow();
         }
     }

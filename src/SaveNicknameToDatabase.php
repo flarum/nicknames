@@ -22,16 +22,10 @@ class SaveNicknameToDatabase {
         $user = $event->user;
         $data = $event->data;
         $actor = $event->actor;
-
-        $isSelf = $actor->id == $user->id;
         $attributes = Arr::get($data, 'attributes', []);
 
         if (isset($attributes['nickname'])) {
-            if ($isSelf) {
-                $actor->assertCan('editOwnNickname', $user);
-            } elseif ($actor->exists) {
-                $actor->assertCan('edit', $user);
-            }
+            $actor->assertCan('editNickname', $user);
 
             $nickname = $attributes['nickname'];
 
