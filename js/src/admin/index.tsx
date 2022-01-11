@@ -1,3 +1,4 @@
+import app from 'flarum/admin/app';
 import Alert from 'flarum/common/components/Alert';
 import Link from 'flarum/common/components/Link';
 
