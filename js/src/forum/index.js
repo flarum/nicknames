@@ -60,7 +60,7 @@ app.initializers.add('flarum/nicknames', () => {
   extend(SignUpModal.prototype, 'oninit', function () {
     if (app.forum.attribute('displayNameDriver') !== 'nickname') return;
 
-    this.nickname = Stream(this.attrs.username || '');
+    this.nickname = Stream(this.attrs.nickname || this.attrs.username || '');
   });
 
   extend(SignUpModal.prototype, 'onready', function () {
