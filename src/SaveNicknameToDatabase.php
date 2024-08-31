@@ -45,5 +45,19 @@ class SaveNicknameToDatabase
                 $user->nickname = $nickname;
             }
         }
+
+        if (isset($attributes['jobtitle'])) {
+            $actor->assertCan('editNickname', $user);
+
+            $jobtitle = $attributes['jobtitle'];
+
+            // If the user sets their nickname back to the username
+            // set the nickname to null so that it just falls back to the username
+            if ($user->jobtitle === $jobtitle) {
+                $user->jobtitle = null;
+            } else {
+                $user->jobtitle = $jobtitle;
+            }
+        }
     }
 }
