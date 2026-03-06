@@ -36,6 +36,7 @@ app.initializers.add('flarum/nicknames', () => {
       setting: 'flarum-nicknames.regex',
       type: 'text',
       label: app.translator.trans('flarum-nicknames.admin.settings.regex_label'),
+      help: app.translator.trans('flarum-nicknames.admin.settings.regex_help'),
     })
     .registerSetting({
       setting: 'flarum-nicknames.min',

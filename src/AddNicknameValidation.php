@@ -38,6 +38,13 @@ class AddNicknameValidation
 
         $rules['nickname'] = [
             function ($attribute, $value, $fail) {
+                // Reject characters used in markdown link syntax that email clients
+                // may render as hyperlinks in notification emails.
+                if (preg_match('/[\[\]()<>]/', $value)) {
+                    $fail($this->translator->trans('flarum-nicknames.api.invalid_nickname_message'));
+                }
+            },
+            function ($attribute, $value, $fail) {
                 $regex = $this->settings->get('flarum-nicknames.regex');
                 if ($regex && ! preg_match_all("/$regex/", $value)) {
                     $fail($this->translator->trans('flarum-nicknames.api.invalid_nickname_message'));

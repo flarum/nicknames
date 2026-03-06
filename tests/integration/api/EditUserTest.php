@@ -81,7 +81,73 @@ class UpdateTest extends TestCase
         );
 
         $this->assertEquals(200, $response->getStatusCode());
-
         $this->assertEquals('new nickname', User::find(2)->nickname);
+    }
+
+    /**
+     * @test
+     */
+    public function nickname_with_dots_is_allowed()
+    {
+        $this->prepareDatabase([
+            'group_permission' => [
+                ['permission' => 'user.editOwnNickname', 'group_id' => 2],
+            ]
+        ]);
+
+        $response = $this->send(
+            $this->request('PATCH', '/api/users/2', [
+                'authenticatedAs' => 2,
+                'json' => [
+                    'data' => [
+                        'attributes' => [
+                            'nickname' => 'jane.smith',
+                        ],
+                    ],
+                ],
+            ])
+        );
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('jane.smith', User::find(2)->nickname);
+    }
+
+    /**
+     * @test
+     * @dataProvider markdownInjectionNicknames
+     */
+    public function nickname_with_markdown_injection_chars_is_rejected(string $nickname)
+    {
+        $this->prepareDatabase([
+            'group_permission' => [
+                ['permission' => 'user.editOwnNickname', 'group_id' => 2],
+            ]
+        ]);
+
+        $response = $this->send(
+            $this->request('PATCH', '/api/users/2', [
+                'authenticatedAs' => 2,
+                'json' => [
+                    'data' => [
+                        'attributes' => [
+                            'nickname' => $nickname,
+                        ],
+                    ],
+                ],
+            ])
+        );
+
+        $this->assertEquals(422, $response->getStatusCode());
+        $this->assertNull(User::find(2)->nickname);
+    }
+
+    public function markdownInjectionNicknames(): array
+    {
+        return [
+            'markdown link syntax' => ['[CLICK](https://evil.com)'],
+            'square brackets only' => ['[username]'],
+            'angle brackets'       => ['<evil.com>'],
+            'parentheses'          => ['evil(com)'],
+        ];
     }
 }
